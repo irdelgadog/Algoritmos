@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+"""
+Editor de Spyder
+
+Este es un archivo temporal
+
+"""
+import math
+import numpy as np
+import pylab as pl
+import random
+
+
+class ContadorDePasos:
+    def __init__(self):
+        self.pasos = 0
+        self.comparaciones = 0
+        self.intercambios = 0
+        
+    def reset (self):
+        self.pasos = 0
+        self.comparaciones = 0
+        self.intercambios = 0
+    
+    def contar (self):
+        self.pasos += 1
+        
+    def comparacion (self):
+        self.comparaciones += 1
+    
+    def intercambio (self):
+        self.intercambios += 1
+    
+    def imprimaEstadisticas (self):
+        print ("Nunmero de instrucciones =", self.pasos)
+        print ("Nunmero de Comparaciones =", self.comparaciones)
+        print ("Nunmero de intercambios =", self.intercambios)
+
+    
+def algoritmo_insercion(A, contador):
+    j = 1; contador.contar()
+    contador.contar()
+    while j < len(A):
+        contador.contar()
+        llave = A[j]; contador.contar()
+        i = j - 1; contador.contar()
+        contador.contar(); contador.comparacion()
+        while (i >= 0) and (A[i] > llave):
+            contador.contar(); contador.comparacion()
+            A[i+1] = A[i]; contador.contar(); contador.intercambio()
+            i = i - 1; contador.contar()
+        A[i + 1] = llave; contador.contar()
+        j = j + 1; contador.contar()
+        
+        
+# logitud del arreglo
+n = int(input('Ingrese el tamaño del arreglo a ordenar\n'))
+A = []
+i = 0
+contadorr = ContadorDePasos()
+
+while(i < n):
+    A.append(random.randint(1,n))
+    i += 1
+
+print (A)
+algoritmo_insercion(A, contadorr)
+print(A)
+contadorr.imprimaEstadisticas()
